@@ -1,6 +1,7 @@
 # grunt-docular
 
 > Extensible Documentation Generation Based on AngularJS's Documentation Generation
+> NOTE: NodeJS has access to your filesystem so please proceed with caution. I will not be held responsible for side effects of bad code or malitious docular extensions.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
@@ -97,7 +98,9 @@ sectionObject.docs (optional) `array [string]` : The docs array is an array of p
 
 
 ## Contributing
-Contributing includes setting up a dev environment by cloning docular, grunt-docular, doc apis (optional), and setting up an example project.
+Contributing includes setting up a dev environment by cloning docular, grunt-docular, doc apis (optional), and setting up an example project. You must have NodeJS installed as well as npm (which now should come bundled with NodeJS).
+
+NodeJS can be installed here [Install NodeJS](http://nodejs.org/)
 
 Here is an example setup:
 
@@ -120,10 +123,107 @@ git clone https://github.com/gitsome/docular-doc-api-doc.git
 git clone https://github.com/gitsome/docular-doc-api-angular.git
 ```
 
+#### Setup Development Sym Links
+NPM provides some sweet methods to setup a dev environment. This allows you to develop NPM dependencies for other NPM packages. [npm link documentation](https://npmjs.org/doc/link.html)
 
+If you follow all of these steps you will have a dev environment testable from a separate project that depends on separate development environments for docular, grunt-docular, and the docular extensions. You will test your changes you make in your cloned git repositories from your testable separate project. We are working on adding unit tests back in so prepare for the AngularJS rigors of adding at least 11 tests per feature :-)
 
+Setup global symlink for docular
+```shell
+cd docular
+npm link
+cd ..
+```
 
+Setup global symlink for grunt-docular
+```shell
+cd grunt-docular
+npm link
+cd ..
+```
+
+Setup global symlink for docular extensions (optional)
+```shell
+cd docular-doc-api-doc
+npm link
+cd ..
+cd docular-doc-api-angular
+npm link
+cd ..
+```
+
+Wire up docular sym link in the grunt-docular package. CD into the grunt-docular directory
+```shell
+cd grunt-docular
+npm link docular
+cd ..
+```
+
+Optionally wire up the sym links for the docular extension api
+```shell
+cd docular
+npm link docular-doc-api-doc
+npm docular-doc-api-angular
+cd ..
+```
+
+Okay now time to setup the separate test project from your environment base
+```shell
+mkdir docular-test
+cd docular-test
+```
+
+Use npm to create an npm package for your test. Run `npm init` and follow the directions, you can use all the defaults.
+```shell
+npm init
+```
+
+Use npm to access the global sym link for the grunt-docular npm package
+```shell
+npm link grunt-docular
+```
+
+Create the following Gruntfile.js file within the root of your docular-test npm package
+```js
+module.exports = function(grunt) {
+
+    // Project configuration.
+    grunt.initConfig({
+
+        pkg: grunt.file.readJSON('package.json'),
+
+        docular: {
+            groups: [],
+            showDocularDocs: true,
+            showAngularDocs: true
+        }
+
+    });
+
+    // Load the plugin that provides the "uglify" task.
+    grunt.loadNpmTasks('grunt-docular');
+
+    // Default task(s).
+    grunt.registerTask('default', ['docular']);
+
+};
+```
+
+#### Run the grunt-docular tasks
+Now within your docular-test project, run grunt to compile the Angular and Dcoular source
+```shell
+grunt docular // you can also do "grunt" beaucse we set up "docular" as the default
+```
+
+Now start up the NodeJS server so you can view the documentation
+```shell
+grunt docular-server
+```
+
+#### Commit your changes
+As usual, edit the different packages.. your changes will immediatly propagate through the sym links to your docular-test project. Submit pull requests as desired. Thank you so much for you time, energy, and ingenuity!!
 
 
 ## Release History
-
+version: 0.1.1
+* Included hooks into the docular api for the docular and docular-server api
