@@ -78,8 +78,27 @@ Here is the group configuration for Angular:
     ]
 }
 ```
+### Group Object Attributes
+groupTitle (required) `string` : The string value that will propogate up to the UI as the name of the tab
+
+groupId (required) `string` : This will be the id used globally within the code and as the directory for this code. It will show in the URL for these docs ie `http:/localhost:8000/documentation/<groupId>/blah blah`.
+
+groupIcon (default="icon-book") `string` : This is an optional attribute that determines the class put on the icon attribute in the UI. This comes from Twitter Boostrap. See [Twitter Boostrap](http://twitter.github.io/bootstrap/base-css.html#images)
+
+sections (required) `array [sectionObject]` : This determines the different sections of documentation within your group. You can see the Angular example above in how it's documentation is broken up into sections that make logical sense.
+
+sectionObject.id (required) `string` : This will be the id used globally within the code and will be the identifier in the url for documentation within this section ie `http:/localhost:8000/documentation/<groupId>/<sectionObject.id>/blah blah`.
+
+sectionObject.title (required) `string` : The title that will show in the tab drop downs for this section of documentation
+
+sectionObject.scripts (optional) `array [string]` : The scripts array is an array of paths to folders and files that contain scripts (really of any kind... could probably be php or java or whatever although that has not been tested). These files will be parsed for documentation that resides within comments (within /** and *). The end of a comment will conclude the end of a complete documentation entry.
+
+sectionObject.docs (optional) `array [string]` : The docs array is an array of paths to folders and files that contain documentation. These files will be parsed assuming that the docs here are not within comments. So this is basically a text file full of docs. This is a great way to provide supplimental documentation, tutorials, guides, and definitions for types etc..
+
 
 ## Contributing
+Contributing includes setting up a dev environment by cloning docular, grunt-docular, doc apis (optional), and setting up an example project.
+
 
 
 ## Release History
