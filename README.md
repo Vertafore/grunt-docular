@@ -99,6 +99,30 @@ sectionObject.docs (optional) `array [string]` : The docs array is an array of p
 ## Contributing
 Contributing includes setting up a dev environment by cloning docular, grunt-docular, doc apis (optional), and setting up an example project.
 
+Here is an example setup:
+
+#### Create a directory for development
+In the command line create a directory and cd into it:
+```shell
+mkdir docular-environment
+cd docular-environment
+```
+
+#### Clone docular, grunt-docular, and docular api extensions
+From within your environment directory
+```shell
+git clone https://github.com/gitsome/docular.git
+git clone https://github.com/gitsome/grunt-docular.git
+```
+optionally clone the docular extensions
+```shell
+git clone https://github.com/gitsome/docular-doc-api-doc.git
+git clone https://github.com/gitsome/docular-doc-api-angular.git
+```
+
+
+
+
 
 
 ## Release History
