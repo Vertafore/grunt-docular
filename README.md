@@ -45,7 +45,39 @@ docAPIOrder (Type:`array [string]`, default=['doc', 'angular']): For each docula
 
 groups (Type:`array [group object]`, default=[]): This is an array of group objects. Groups have their own api but generally consists of some meta data and lists of files that need to be parsed and rendered for documentation. For more check out
 
-### Usage Examples
+### Groups
+Group configurations for Angular and the docular documentation are stored and pushed into all groups if you set the showAngularDocs and showDocularDocs options to true. These configurations are identical to what you would use to configure docular to parse and render your own documentation.
+
+Here is the group configuration for Angular:
+```js
+{
+    groupTitle: 'Angular Docs', //this is what will show up in the UI for this group
+    groupId: 'angular', //to determine what directory these docs will go into and used as an identifier
+    groupIcon: 'icon-book', //icon to use when relevant and within this group of documentation
+    sections: [
+        {
+            id: "api",
+            title:"Angular API",
+            scripts: ["lib/angular/js"]
+        },
+        {
+            id: "guide",
+            title: "Developers Guide",
+            docs: ["lib/angular/ngdocs/guide"]
+        },
+        {
+            id: "tutorial",
+            title: "Tutorial",
+            docs: ["lib/angular/ngdocs/tutorial"]
+        },
+        {
+            id: "misc",
+            title: "Overview",
+            docs: ["lib/angular/ngdocs/misc"]
+        }
+    ]
+}
+```
 
 ## Contributing
 
