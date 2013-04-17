@@ -1,5 +1,7 @@
 # grunt-docular
 
+![docular](http://johndavidfive.com/images/docular.png "Docular Image")
+
 > Extensible Documentation Generation Based on AngularJS's Documentation Generation
 > NOTE: NodeJS has access to your filesystem so please proceed with caution. I will not be held responsible for side effects of bad code or malitious docular extensions.
 
@@ -210,7 +212,7 @@ module.exports = function(grunt) {
 ```
 
 #### Run the grunt-docular tasks
-Now within your docular-test project, run grunt to compile the Angular and Dcoular source
+Now within your docular-test project, run grunt to compile the Angular and Docular source
 ```shell
 grunt docular // you can also do "grunt" beaucse we set up "docular" as the default
 ```
