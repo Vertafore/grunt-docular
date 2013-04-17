@@ -24,66 +24,31 @@ In your project's Gruntfile, add a section named `docular` to the data object pa
 
 ```js
 grunt.initConfig({
-  docular: {
-    options: {
-      // Task-specific options go here.
+    docular: {
+        baseUrl: 'http://localhost:8000', //the base url of your app, this is rendered as the base tag
+        showAngularDocs: true, //include the generation and rendering of angular documentation
+        showDocularDocs: true, //include the generation and rendering of Docular documentation
+        docAPIOrder : ['doc', 'angular'], //when ui resources are loaded they follow this order
+        groups: [] //group objects to parse and render additional documentation (see api)
     },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
-  },
 })
 ```
 
 ### Options
+baseURL (Type:`string`, default=""): Angular uses the <base> tag to designate the baseUrl for an app. This is helpful for helping resolve routes and location through the $location service
 
-#### options.separator
-Type: `String`
-Default value: `',  '`
+showAngularDocs (Type:`boolean`, default=false): The angular source is included in the docular package so it can be parsed and rendered to both help test the docular package and provide angular documentation for apps that use it.
 
-A string value that is used to do something with whatever.
+showDocularDocs (Type:`boolean`, default=false): Setting this to true will have docular parse and render the documentation for the docular plugin itself. This is helpful for developers to understand the default doc api (docular-doc-api-doc) to help them create their own docular api extensions.
 
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
+docAPIOrder (Type:`array [string]`, default=['doc', 'angular']): For each docular api extension, we need to know which order to include the UI scripts and CSS due to overrides etc..
 
-A string value that is used to do something else with whatever else.
+groups (Type:`array [group object]`, default=[]): This is an array of group objects. Groups have their own api but generally consists of some meta data and lists of files that need to be parsed and rendered for documentation. For more check out
 
 ### Usage Examples
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
-
-```js
-grunt.initConfig({
-  docular: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
-```
-
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
-
-```js
-grunt.initConfig({
-  docular: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
-```
-
 ## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+
 
 ## Release History
-_(Nothing yet)_
+

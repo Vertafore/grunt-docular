@@ -28,6 +28,7 @@ module.exports = function(grunt) {
         //Run the gen-docs script
         var process_gen_docs_done = this.async();
         docular.genDocs(options, function(){
+
             //make good on the async promise
             process_gen_docs_done();
         });
