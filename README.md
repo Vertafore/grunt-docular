@@ -128,7 +128,7 @@ git clone https://github.com/gitsome/docular-doc-api-angular.git
 #### Setup Development Sym Links
 NPM provides some sweet methods to setup a dev environment. This allows you to develop NPM dependencies for other NPM packages. [npm link documentation](https://npmjs.org/doc/link.html)
 
-If you follow all of these steps you will have a dev environment testable from a separate project that depends on separate development environments for docular, grunt-docular, and the docular extensions. You will test your changes you make in your cloned git repositories from your testable separate project. We are working on adding unit tests back in so prepare for the AngularJS rigors of adding at least 11 tests per feature :-)
+If you follow all of these steps you will have a dev environment that can run the grunt-docular grunt plugin. The grunt-plugin cloned repo will be isolated outside your docular-test code via sym links, so changes you make in the grunt-plugin code will be kept isolated from changes in your docular-test code. Additionally, docular will be sym linked from the grunt-docular code. This allows you to isolate changes for the docular code while seeing its changes in the docular-test environment.
 
 Setup global symlink for docular
 ```shell
