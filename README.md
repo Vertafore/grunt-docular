@@ -1,4 +1,9 @@
-# grunt-docular
+@doc overview
+@name index
+@description
+
+#grunt-docular
+The grunt-plugin exposes the docular api to grunt. It allows for integration in a build process that can generate documentation and fire up a quick node server to view that documentation.
 
 ![docular](http://johndavidfive.com/images/docular.png "Docular Image")
 
@@ -26,6 +31,7 @@ grunt.loadNpmTasks('grunt-docular');
 In your project's Gruntfile, add a section named `docular` to the data object passed into `grunt.initConfig()`.
 
 ```js
+
 grunt.initConfig({
     docular: {
         baseUrl: 'http://localhost:8000', //the base url of your app, this is rendered as the base tag
@@ -35,6 +41,7 @@ grunt.initConfig({
         groups: [] //group objects to parse and render additional documentation (see api)
     },
 })
+
 ```
 
 ### Options
