@@ -2,13 +2,17 @@
 @name index
 @description
 
-#grunt-docular
-The grunt-plugin exposes the docular api to grunt. It allows for integration in a build process that can generate documentation and fire up a quick node server to view that documentation.
-
-![docular](http://johndavidfive.com/images/docular.png "Docular Image")
+#Docular
 
 > Extensible Documentation Generation Based on AngularJS's Documentation Generation
 > NOTE: NodeJS has access to your filesystem so please proceed with caution. I will not be held responsible for side effects of bad code or malitious docular extensions.
+
+#Grunt Plugin For Docular: "grunt-docular"
+
+> Docular is best used as a dependency by the grunt-docular plugin.
+> The grunt-docular plugin exposes the api in a simple fashion and helps you include documentation tasks in your grunt-based build process.
+
+![docular](http://grunt-docular.com/public/docular-screenshot.png "Docular Image")
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
@@ -34,11 +38,11 @@ In your project's Gruntfile, add a section named `docular` to the data object pa
 
 grunt.initConfig({
     docular: {
-        baseUrl: 'http://localhost:8000', //the base url of your app, this is rendered as the base tag
-        showAngularDocs: true, //include the generation and rendering of angular documentation
-        showDocularDocs: true, //include the generation and rendering of Docular documentation
-        docAPIOrder : ['doc', 'angular'], //when ui resources are loaded they follow this order
-        groups: [] //group objects to parse and render additional documentation (see api)
+        baseUrl: 'http://localhost:8000', //base tag used by Angular
+        showAngularDocs: true, //parse and render Angular documentation
+        showDocularDocs: true, //parse and render Docular documentation
+        docAPIOrder : ['doc', 'angular'], //order to load ui resources
+        groups: [] //groups of documentation to parse
     },
 })
 
@@ -61,9 +65,9 @@ Group configurations for Angular and the docular documentation are stored and pu
 Here is the group configuration for Angular:
 ```js
 {
-    groupTitle: 'Angular Docs', //this is what will show up in the UI for this group
-    groupId: 'angular', //to determine what directory these docs will go into and used as an identifier
-    groupIcon: 'icon-book', //icon to use when relevant and within this group of documentation
+    groupTitle: 'Angular Docs', //Title used in the UI
+    groupId: 'angular', //identifier and determines directory
+    groupIcon: 'icon-book', //Icon to use for this group
     sections: [
         {
             id: "api",
@@ -113,14 +117,14 @@ NodeJS can be installed here [Install NodeJS](http://nodejs.org/)
 
 Here is an example setup:
 
-#### Create a directory for development
+### Create a directory for development
 In the command line create a directory and cd into it:
 ```shell
 mkdir docular-environment
 cd docular-environment
 ```
 
-#### Clone docular, grunt-docular, and docular api extensions
+### Clone docular, grunt-docular, and docular api extensions
 From within your environment directory:
 ```shell
 git clone https://github.com/gitsome/docular.git
@@ -132,7 +136,7 @@ git clone https://github.com/gitsome/docular-doc-api-doc.git
 git clone https://github.com/gitsome/docular-doc-api-angular.git
 ```
 
-#### Setup Development Sym Links
+### Setup Development Sym Links
 NPM provides some sweet methods to setup a dev environment. This allows you to develop NPM dependencies for other NPM packages. [npm link documentation](https://npmjs.org/doc/link.html).
 
 If you follow all of these steps you will have a dev environment that can run the grunt-docular grunt plugin. The grunt-plugin cloned repo will be isolated outside your docular-test code via sym links, so changes you make in the grunt-plugin code will be kept isolated from changes in your docular-test code. Additionally, docular will be sym linked from the grunt-docular code. This allows you to isolate changes for the docular code while seeing its changes in the docular-test environment.
@@ -218,7 +222,7 @@ module.exports = function(grunt) {
 };
 ```
 
-#### Run the grunt-docular tasks
+### Run the grunt-docular tasks
 Now within your docular-test project, run grunt to compile the Angular and Docular source:
 ```shell
 grunt docular // you can also do "grunt" beaucse we set up "docular" as the default
@@ -229,7 +233,7 @@ Now start up the NodeJS server so you can view the documentation:
 grunt docular-server
 ```
 
-#### Commit your changes
+### Commit your changes
 As usual, edit the different packages.. your changes will immediatly propagate through the sym links to your docular-test project. Submit pull requests as desired. Thank you so much for you time, energy, and ingenuity!!
 
 
