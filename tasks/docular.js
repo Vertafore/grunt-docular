@@ -38,12 +38,11 @@ module.exports = function(grunt) {
 
     /**
      * Launch a simple nodeJS web server for documentation
-     * @param  {[type]} ) {}          [description]
-     * @return {[type]}   [description]
+     * @param  {number} requestedPort optionally specifies the port on which the server will listen.  Default is 8000
      */
-    grunt.registerTask('docular-server', 'Start a simple NodeJS server so you can view the documentation.', function() {
+    grunt.registerTask('docular-server', 'Start a simple NodeJS server so you can view the documentation.', function(requestedPort) {
 
-        var port = 8000;
+        var port = requestedPort || 8000;
 
         var docular = require('docular');
 
