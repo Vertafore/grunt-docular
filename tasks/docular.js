@@ -30,7 +30,7 @@ module.exports = function(grunt) {
         docular.genDocs(options, function(){
 
             //make good on the async promise
-            process_gen_docs_done();
+            return process_gen_docs_done();
         });
 
     });
