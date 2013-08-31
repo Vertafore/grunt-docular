@@ -42,20 +42,29 @@ module.exports = function(grunt) {
      */
     grunt.registerTask('docular-server', 'Start a simple NodeJS server so you can view the documentation.', function(requestedPort) {
 
+        var options_docular = grunt.config('docular') || {};
         var options = grunt.config('docular-server') || {};
         var port = requestedPort || options.port || 8000;
 
         var docular = require('docular');
 
+        //Grab a new async promise
+        var process_server_done = this.async();
+        try {
+
+            docular.server({port:port, docular_webapp_target: options_docular.docular_webapp_target}, function(){
+                process_server_done();
+            });
+
+        } catch (e) {
+
+            console.log("ERROR:".red, ' Could not start node server', e);
+
+        }
+
         //Notify the user
         console.log("");
         console.log("Documentation server running at ".yellow + ('http://127.0.0.1:' + port + '/').green);
-
-        //Grab a new async promise
-        var process_server_done = this.async();
-        docular.server(port, function(){
-            process_server_done();
-        });
 
     });
 
