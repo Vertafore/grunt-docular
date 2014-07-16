@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "colors": "*",
-    "docular": "*"
+    "docular": "git+https://github.com/Vertafore/docular.git#nohtml5"
   },
   "keywords": [
     "gruntplugin", "angular", "angularjs", "documentation"
