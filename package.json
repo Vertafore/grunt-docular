@@ -1,7 +1,7 @@
 {
-  "name": "grunt-docular",
+  "name": "grunt-wdocular",
   "description": "Extensible Documentation Generation Based on AngularJS's Documentation Generation",
-  "version": "0.1.2",
+  "version": "0.1.1",
   "homepage": "http://grunt-docular.com",
   "author": {
     "name": "John Martin",
@@ -10,10 +10,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gitsome/grunt-docular"
+    "url": "https://github.com/idanush/grunt-docular"
   },
   "bugs": {
-    "url": "https://github.com/gitsome/grunt-docular/issues"
+    "url": "https://github.com/idanush/grunt-docular/issues"
   },
   "licenses": [
     {
@@ -27,14 +27,16 @@
   ],
   "main": "Gruntfile.js",
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">= 0.10.0"
   },
   "scripts": {
     "test": "grunt test"
   },
   "dependencies": {
+    "wdocular": "*",
     "colors": "*",
-    "docular": "*"
+    "express": "*",
+    "connect-livereload": "*"
   },
   "keywords": [
     "gruntplugin", "angular", "angularjs", "documentation"
