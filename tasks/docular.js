@@ -22,7 +22,7 @@ module.exports = function(grunt) {
     */
     grunt.registerTask('docular', 'Configurable setup to generate AngularJS and other class based documentation.', function() {
 
-        var docular = require('docular');
+        var docular = require('wdocular');
         var options = grunt.config('docular');
 
         //Run the gen-docs script
@@ -40,26 +40,41 @@ module.exports = function(grunt) {
      * Launch a simple nodeJS web server for documentation
      * @param  {number} requestedPort optionally specifies the port on which the server will listen.  Default is 8000
      */
-    grunt.registerTask('docular-server', 'Start a simple NodeJS server so you can view the documentation.', function(requestedPort) {
+    grunt.registerTask('docularserver', 'Start a simple Express server so you can view the documentation.', function(requestedPort) {
 
-        var options_docular = grunt.config('docular') || {};
-        var options = grunt.config('docular-server') || {};
+        var path=require('path');
+
+        var options = grunt.config('docularserver') || {};
         var port = requestedPort || options.port || 8000;
-
-        var docular = require('docular');
+        var targetDir = path.join(process.cwd(), options.targetDir)
 
         //Grab a new async promise
         var process_server_done = this.async();
         try {
+            var express = require('express');
+            var app = express();
+            app.use(require('connect-livereload')({
+                port: 35729
+            }));
 
-            docular.server({port:port, docular_webapp_target: options_docular.docular_webapp_target}, function(){
-                process_server_done();
+            app.use('/configs',  express.static(path.join(targetDir, '/configs')));
+            app.use('/controller', express.static(path.join(targetDir, '/controller')));
+            app.use('/documentation', express.static(path.join(targetDir, '/documentation')));
+            app.use('/resources', express.static(path.join(targetDir, '/resources')));
+
+            app.use('/resources', function(req,res){
+                res.status(404).send('');
             });
 
+            app.use('/', function (req, res){
+               res.sendfile(path.join(targetDir, '/index.html'));
+            });
+
+            var server = app.listen(port, function(){
+                console.log('server started on port: %d', server.address().port);
+            });
         } catch (e) {
-
             console.log("ERROR:".red, ' Could not start node server', e);
-
         }
 
         //Notify the user
