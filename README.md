@@ -29,6 +29,8 @@ One the plugin has been installed, it may be enabled inside your Gruntfile with 
 grunt.loadNpmTasks('grunt-docular');
 ```
 
+## The "docular" task
+
 ### Overview
 In your project's Gruntfile, add a section named `docular` to the data object passed into `grunt.initConfig()`.
 
@@ -124,7 +126,7 @@ Here is the group configuration for Angular:
 
 ``sectionObject.docs`` (optional) `array [string]` : The docs array is an array of paths to folders and files that contain documentation. These files will be parsed assuming that the docs here are not within comments. So this is basically a text file full of docs. This is a great way to provide supplimental documentation, tutorials, guides, and definitions for types etc..
 
-### Docular Server
+## Docular Server
 
 grunt-docular allows you to run an HTML 5 mode compliant server hosted on [express](http://expressjs.com/) to host your docular documentation by running
 
@@ -274,5 +276,8 @@ As usual, edit the different packages.. your changes will immediatly propagate t
 
 
 ## Release History
+version: 0.1.3
+* Added a server task with a livereload option
+
 version: 0.1.1
 * Included hooks into the docular api for the docular and docular-server api
