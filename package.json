@@ -1,7 +1,7 @@
 {
   "name": "grunt-docular",
   "description": "Extensible Documentation Generation Based on AngularJS's Documentation Generation",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "homepage": "http://grunt-docular.com",
   "author": {
     "name": "Stephen Liberty",
@@ -28,7 +28,7 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "docular": "*",
+    "docular": "~0.8.0",
     "docular-ng-plugin": "*",
     "docular-markdown-plugin": "*",
     "colors": "*",
