@@ -21,18 +21,22 @@ module.exports = function(grunt) {
     * @return {[type]}
     */
     grunt.registerTask('docular', 'Configurable setup to generate AngularJS and other class based documentation.', function() {
-
+        
         var docular = require('docular');
         var options = grunt.config('docular');
 
+        if(!options.plugins) {
+            options.plugins = [require('docular-ng-plugin'), require('docular-markdown-plugin')];
+        }
+        
         //Run the gen-docs script
         var process_gen_docs_done = this.async();
-        docular.genDocs(options, function(){
-
-            //make good on the async promise
-            return process_gen_docs_done();
+        docular.genDocs(options).then(function () {
+            process_gen_docs_done(true)
+        }, function (err) {
+            console.error(err);
+            process_gen_docs_done(false);
         });
-
     });
 
 
