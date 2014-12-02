@@ -7,7 +7,48 @@
  */
 var colors = require('colors');
 
+
 module.exports = function(grunt) {
+
+    function recursiveConfigMunge(groupData) {
+        if(groupData.sections) {
+            groupData.groups = groupData.sections;
+        }
+        if(groupData.id) {
+            groupData.groupId = groupData.id;
+            delete groupData.id;
+        }
+        if(groupData.title) {
+            groupData.groupTitle = groupData.title;
+        }
+        if(!groupData.files) {
+            groupData.files = [];
+        }
+        if(groupData.scripts) {
+            groupData.files = groupData.files.concat(groupData.scripts);
+            delete groupData.scripts;
+        }
+        if(groupData.docs) {
+            groupData.files = groupData.files.concat(groupData.docs);
+            delete groupData.docs;
+        }
+
+        groupData.files = grunt.file.expand({cwd: process.cwd()}, groupData.files)
+
+        if(groupData.groupIcon) {
+            groupData.groupIcon = groupData.groupIcon.replace('icon-', '').replace('fa-', '');
+        } else {
+            groupData.groupIcon = 'code';
+        }
+
+        if(groupData.groups) {
+            for(var i = 0, l = groupData.groups.length; i < l; i++) {
+                recursiveConfigMunge(groupData.groups[i]);
+            }
+        }
+
+        return groupData;
+    }
 
     var sys = require('sys');
     var exec = require('child_process').exec;
@@ -20,10 +61,13 @@ module.exports = function(grunt) {
     * The main docular task
     * @return {[type]}
     */
+
     grunt.registerTask('docular', 'Configurable setup to generate AngularJS and other class based documentation.', function() {
         
         var docular = require('docular');
         var options = grunt.config('docular');
+
+        recursiveConfigMunge(options);
 
         if(!options.plugins) {
             options.plugins = [require('docular-ng-plugin'), require('docular-markdown-plugin')];
