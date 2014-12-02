@@ -41,11 +41,17 @@ module.exports = function(grunt) {
     nodeunit: {
       tests: ['test/*_test.js'],
     },
-
+      bump: {
+          options: {
+              pushTo: 'origin'
+          }
+      }
   });
 
   // Actually load this plugin's task(s).
   grunt.loadTasks('tasks');
+
+  grunt.loadNpmTasks('grunt-bump');
 
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-jshint');

@@ -35,6 +35,11 @@
     "express": "*",
     "connect-livereload": "*"
   },
+  "devDependencies": {
+      "grunt": "~0.4.1",
+      "grunt-cli": "*",
+      "grunt-bump": "*"
+  },
   "keywords": [
     "gruntplugin", "angular", "angularjs", "documentation"
   ]
