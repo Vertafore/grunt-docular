@@ -2,7 +2,7 @@
 @name index
 @description
 
-[![NPM version](https://badge.fury.io/js/docular.svg)](http://badge.fury.io/js/grunt-docular)
+[![NPM version](https://badge.fury.io/js/grunt-docular.svg)](http://badge.fury.io/js/grunt-docular)
 
 #Docular
 
