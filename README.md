@@ -2,6 +2,8 @@
 @name index
 @description
 
+[![NPM version](https://badge.fury.io/js/docular.svg)](http://badge.fury.io/js/docular)
+
 #Docular
 
 > Extensible Documentation Generation Based on AngularJS's Documentation Generation
