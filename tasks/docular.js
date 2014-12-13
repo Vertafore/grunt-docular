@@ -112,7 +112,10 @@ module.exports = function(grunt) {
             app.use('/configs',  express.static(path.join(targetDir, '/configs')));
             app.use('/controller', express.static(path.join(targetDir, '/controller')));
             app.use('/documentation', express.static(path.join(targetDir, '/documentation')));
+            app.use('/sources', express.static(path.join(targetDir, '/sources')));
             app.use('/resources', express.static(path.join(targetDir, '/resources')));
+            app.use('/site.json', express.static(path.join(targetDir, '/site.json')));
+            app.use('/structure.json', express.static(path.join(targetDir, '/structure.json')));
 
             app.use('/resources', function(req,res){
                 res.status(404).send('');
