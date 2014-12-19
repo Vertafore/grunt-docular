@@ -92,9 +92,12 @@ module.exports = function(grunt) {
 
         var path=require('path');
 
-        var options = grunt.config('docularserver') || {};
+        var options = grunt.config('docularserver') || grunt.config('docular');
         var port = requestedPort || options.port || 8000;
-        var targetDir = path.join(process.cwd(), options.targetDir)
+        var targetDir = path.join(process.cwd(), options.targetDir || options.docular_webapp_target);
+        if (targetDir === process.cwd()){
+            console.warn('you need to supply either docular.docular_webapp_target or docularserver.targetDir to use this server'.yellow);
+        }
 
         //Grab a new async promise
         var process_server_done = this.async();
@@ -114,15 +117,22 @@ module.exports = function(grunt) {
             app.use('/documentation', express.static(path.join(targetDir, '/documentation')));
             app.use('/sources', express.static(path.join(targetDir, '/sources')));
             app.use('/resources', express.static(path.join(targetDir, '/resources')));
-            app.use('/site.json', express.static(path.join(targetDir, '/site.json')));
-            app.use('/structure.json', express.static(path.join(targetDir, '/structure.json')));
 
-            app.use('/resources', function(req,res){
-                res.status(404).send('');
+            app.use(['/resources', '/configs', '/controller', '/documentation', '/sources'] , function(req,res){
+                res.status(404).send('file not found');
             });
 
+            app.use('/site.json', function(req, res){
+                res.sendFile(path.join(targetDir, '/site.json'));
+            });
+
+            app.use('/structure.json', function(req, res){
+                res.sendFile(path.join(targetDir, '/structure.json'));
+            });
+
+
             app.use('/', function (req, res){
-               res.sendfile(path.join(targetDir, '/index.html'));
+               res.sendFile(path.join(targetDir, '/index.html'));
             });
 
             var server = app.listen(port, function(){
